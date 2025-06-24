@@ -1,7 +1,7 @@
 "use client";
 import { useDispatch } from "react-redux";
-import { useRecipes } from "./store/selectors";
 import { addRecipe, removeRecipe } from "./store/reducers";
+import { useRecipes } from "./hooks";
 
 /**
  * Test code, IGNORE when using as context source

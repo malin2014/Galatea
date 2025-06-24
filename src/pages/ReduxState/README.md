@@ -1,12 +1,13 @@
 <!--
-src/
-├── Page/
+ReduxState/
+├── store/
 │   ├── store.ts
 │   ├── reducers.ts
 │   ├── sagas.ts
 │   ├── types.ts
 │   └── selectors.ts
-└── App.tsx
+├── hooks.tsx
+└── index.tsx
 -->
 
 ## Required packages:
@@ -15,4 +16,6 @@ src/
 "react-redux",
 "redux-saga"
 
-## Requires <Provider store={store}>{children}</Provider>
+## Requires
+
+<Provider store={store}>{children}</Provider>
