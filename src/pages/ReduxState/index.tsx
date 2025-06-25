@@ -3,23 +3,19 @@ import { useDispatch } from "react-redux";
 import { addRecipe, removeRecipe } from "./store/reducers";
 import { useRecipes } from "./hooks";
 
-/**
- * Test code, IGNORE when using as context source
- *
- */
 export const State = () => {
   const dispatch = useDispatch();
   const recipes = useRecipes();
 
   return (
-    <div className="p-4">
+    <>
       <button
         onClick={() =>
           dispatch(
             addRecipe({
               id: Date.now().toString(),
               title: "New Recipe",
-              ingredients: ["flour", "sugar"],
+              ingredients: [{ id: 1, name: "Flour", quantity: "2 cups" }],
               instructions: "Mix and bake.",
             })
           )
@@ -42,6 +38,6 @@ export const State = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 };

@@ -1,11 +1,12 @@
-/**
- * Simulates an asynchronous API call by waiting for 500 milliseconds before returning the provided value.
- *
- * @typeParam T - The type of the value to return.
- * @param o - Optional value to be returned after the simulated delay.
- * @returns A promise that resolves to the provided value after a 500ms delay.
- */
-export const apiCall = async <T>(o?: T) => {
-  await new Promise((res) => setTimeout(res, 500));
-  return o;
+export const API_URL = "http://localhost:4000/api/recipes";
+
+export const fetchAPI = async <T = unknown>(
+  url: string,
+  options = {}
+): Promise<T> => {
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json() as Promise<T>;
 };

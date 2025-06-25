@@ -1,12 +1,18 @@
-export interface Recipe {
+export interface IRecipe {
   id: string;
   title: string;
-  ingredients: string[];
+  ingredients: IIngredient[];
   instructions: string;
 }
 
-export interface RecipesState {
-  recipes: Recipe[];
+export interface IRecipesState {
+  recipes: IRecipe[];
   loading: boolean;
   error?: string;
+}
+
+export interface IIngredient {
+  id: number;
+  name: string;
+  quantity: string;
 }

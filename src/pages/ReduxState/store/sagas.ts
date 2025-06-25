@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from "redux-saga/effects";
-import { Recipe } from "./types";
-import { apiCall } from "@/utils";
+import { IRecipe } from "./types";
+import { API_URL, fetchAPI } from "@/utils";
 import {
   addRecipe,
   addRecipeFailure,
@@ -24,7 +24,7 @@ import {
  */
 function* getRecipesSaga() {
   try {
-    const recipes: Recipe[] = yield call(apiCall, []);
+    const recipes: IRecipe[] = yield call(fetchAPI, API_URL);
     yield put(getRecipesSuccess(recipes));
   } catch {
     yield put(getRecipesFailure("Failed to fetch recipe"));
@@ -41,9 +41,13 @@ function* getRecipesSaga() {
  * @yields {Recipe} The newly added recipe on success.
  * @yields {void} Dispatches a failure action with an error message on failure.
  */
-function* addRecipeSaga(action: { type: string; payload: Recipe }) {
+function* addRecipeSaga(action: { type: string; payload: IRecipe }): Generator {
   try {
-    const newRecipe: Recipe = yield call(apiCall, action.payload);
+    const newRecipe: IRecipe = yield call(fetchAPI, API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(action.payload),
+    });
     yield put(addRecipeSuccess(newRecipe));
   } catch {
     yield put(addRecipeFailure("Failed to add recipe"));
@@ -60,9 +64,12 @@ function* addRecipeSaga(action: { type: string; payload: Recipe }) {
  * @yields {string} The id of the removed recipe on success.
  * @yields {void} Dispatches a failure action with an error message on failure.
  */
-function* removeRecipeSaga(action: { type: string; payload: string }) {
+function* removeRecipeSaga(action: {
+  type: string;
+  payload: string;
+}): Generator {
   try {
-    yield call(apiCall, action.payload);
+    yield fetchAPI(`${API_URL}/${action.payload}`, { method: "DELETE" });
     yield put(removeRecipeSuccess(action.payload));
   } catch {
     yield put(removeRecipeFailure("Failed to remove recipe"));
