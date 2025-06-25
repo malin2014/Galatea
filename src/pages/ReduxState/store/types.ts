@@ -7,8 +7,12 @@ export interface IRecipe {
 
 export interface IRecipesState {
   recipes: IRecipe[];
-  loading: boolean;
-  error?: string;
+  fetchRecipeLoading: boolean;
+  fetchRecipeError?: string;
+  addRecipeLoading: boolean;
+  addRecipeError?: string;
+  removeRecipeLoading: boolean;
+  removeRecipeError?: string;
 }
 
 export interface IIngredient {

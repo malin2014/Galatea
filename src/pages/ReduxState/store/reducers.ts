@@ -1,25 +1,34 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { RecipesState, Recipe } from "./types";
+import { IRecipesState, IRecipe } from "./types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 /**
- * The initial state for the recipes reducer.
+ * Initial state for the recipes slice.
  *
- * @property recipes - An array holding the list of recipe objects.
- * @property loading - A boolean indicating whether recipes are currently being loaded.
- * @property error - An optional error message if loading fails.
+ * This state includes:
+ * - `recipes`: An array of recipe objects.
+ * - `fetchRecipeLoading`: A boolean indicating if a fetch operation is in progress.
+ * - `fetchRecipeError`: An optional string for any error that occurs during fetching.
+ * - `addRecipeLoading`: A boolean indicating if an add operation is in progress.
+ * - `addRecipeError`: An optional string for any error that occurs during adding a recipe.
+ * - `removeRecipeLoading`: A boolean indicating if a remove operation is in progress.
+ * - `removeRecipeError`: An optional string for any error that occurs during removing a recipe.
  */
-const initialState: RecipesState = {
+const initialState: IRecipesState = {
   recipes: [],
-  loading: false,
-  error: undefined,
+  fetchRecipeLoading: false,
+  fetchRecipeError: undefined,
+  addRecipeLoading: false,
+  addRecipeError: undefined,
+  removeRecipeLoading: false,
+  removeRecipeError: undefined,
 };
 
 /**
  * A Redux slice for managing recipe-related state.
  *
  * This slice handles the following actions:
- * - Fetching recipes (`getRecipes`, `getRecipesSuccess`, `getRecipesFailure`)
+ * - Fetching recipes (`fetchRecipes`, `fetchRecipesSuccess`, `fetchRecipesFailure`)
  * - Adding a new recipe (`addRecipe`, `addRecipeSuccess`, `addRecipeFailure`)
  * - Removing a recipe (`removeRecipe`, `removeRecipeSuccess`, `removeRecipeFailure`)
  *
@@ -30,64 +39,66 @@ const initialState: RecipesState = {
  *
  * @example
  * // Dispatch an action to fetch recipes
- * dispatch(recipeSlice.actions.getRecipes());
+ * dispatch(recipeSlice.actions.fetchRecipes());
  */
 export const recipeSlice = createSlice({
   name: "recipes",
   initialState,
   reducers: {
-    getRecipes: (state) => ({
+    fetchRecipes: (state) => ({
       ...state,
-      loading: true,
-      error: undefined,
+      fetchRecipeLoading: true,
+      fetchRecipeError: undefined,
     }),
-    getRecipesSuccess: (state, action: PayloadAction<Recipe[]>) => ({
+    fetchRecipesSuccess: (state, action: PayloadAction<IRecipe[]>) => ({
       ...state,
       recipes: action.payload,
-      loading: false,
+      fetchRecipeLoading: false,
     }),
-    getRecipesFailure: (state, action: PayloadAction<string>) => ({
+    fetchRecipesFailure: (state, action: PayloadAction<string>) => ({
       ...state,
-      error: action.payload,
-      loading: false,
+      fetchRecipeError: action.payload,
+      fetchRecipeLoading: false,
     }),
-    addRecipe: (state, _action: PayloadAction<Recipe>) => ({
+    addRecipe: (state, _action: PayloadAction<IRecipe>) => ({
       ...state,
-      loading: true,
-      error: undefined,
+      addRecipeLoading: true,
+      addRecipeError: undefined,
     }),
-    addRecipeSuccess: (state, action: PayloadAction<Recipe>) => ({
+    addRecipeSuccess: (state, action: PayloadAction<IRecipe>) => ({
       ...state,
       recipes: [...state.recipes, action.payload],
-      loading: false,
+      addRecipeLoading: false,
     }),
     addRecipeFailure: (state, action: PayloadAction<string>) => ({
       ...state,
-      loading: false,
-      error: action.payload,
+      addRecipeLoading: false,
+      addRecipeError: action.payload,
     }),
     removeRecipe: (state, _action: PayloadAction<string>) => ({
       ...state,
-      loading: true,
-      error: undefined,
+      removeRecipeLoading: true,
+      removeRecipeError: undefined,
     }),
     removeRecipeSuccess: (state, action: PayloadAction<string>) => ({
       ...state,
-      recipes: state.recipes.filter((recipe) => recipe.id !== action.payload),
-      loading: false,
+      recipes: state.recipes.filter(
+        (recipe: IRecipe) => recipe.id !== action.payload
+      ),
+      removeRecipeLoading: false,
     }),
     removeRecipeFailure: (state, action: PayloadAction<string>) => ({
       ...state,
-      loading: false,
-      error: action.payload,
+      removeRecipeLoading: false,
+      removeRecipeError: action.payload,
     }),
   },
 });
 
 export const {
-  getRecipes,
-  getRecipesSuccess,
-  getRecipesFailure,
+  fetchRecipes,
+  fetchRecipesSuccess,
+  fetchRecipesFailure,
   addRecipe,
   addRecipeSuccess,
   addRecipeFailure,

@@ -2,28 +2,27 @@
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Recipe } from "./store/types";
-import { selectRecipes } from "./store/selectors";
-import { getRecipes } from "./store/reducers";
+import { selectFetchRecipeState } from "./store/selectors";
+import { fetchRecipes } from "./store/reducers";
+import { IState } from "@/types";
 
 /**
- * Custom React hook to retrieve the list of recipes from the Redux store.
+ * Custom React hook to access and fetch the recipes state from the Redux store.
  *
- * This hook dispatches the `getRecipes` action on mount to fetch recipes,
- * and returns the current list of recipes from the Redux state.
+ * This hook dispatches the `fetchRecipes` action on mount to ensure the latest
+ * recipes are loaded, and returns the current recipes state from the Redux store.
  *
- * @returns {Recipe[]} The array of recipes from the Redux store.
+ * @returns {IState} The current state of recipes from the Redux store.
  *
- * @remarks
- * - Relies on the `selectRecipes` selector to access recipes from the state.
- * - Automatically triggers a fetch for recipes when the component mounts.
+ * @example
+ * const recipes = useRecipes();
  */
-export const useRecipes = (): Recipe[] => {
+export const useRecipes = (): IState => {
   const dispatch = useDispatch();
-  const recipes = useSelector(selectRecipes);
+  const recipes = useSelector(selectFetchRecipeState);
 
   useEffect(() => {
-    dispatch(getRecipes());
+    dispatch(fetchRecipes());
   }, []);
 
   return recipes;

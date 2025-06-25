@@ -1,10 +1,8 @@
 <!-- ```
 UseQuery/
-├── README.md
 ├── index.ts
-├── useQuery.ts
-├── useQuery.test.ts
-├── types.ts
+├── hooks.ts
+├── queries.ts
 ``` -->
 
 ## Required packages:

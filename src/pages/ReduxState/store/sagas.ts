@@ -8,26 +8,26 @@ import {
   removeRecipe,
   removeRecipeFailure,
   removeRecipeSuccess,
-  getRecipes,
-  getRecipesSuccess,
-  getRecipesFailure,
+  fetchRecipes,
+  fetchRecipesSuccess,
+  fetchRecipesFailure,
 } from "./reducers";
 
 /**
  * Saga to fetch recipes from the API.
  *
  * This generator function attempts to retrieve a list of recipes by calling the `apiCall` function.
- * On success, it dispatches the `getRecipesSuccess` action with the fetched recipes.
- * On failure, it dispatches the `getRecipesFailure` action with an error message.
+ * On success, it dispatches the `fetchRecipesSuccess` action with the fetched recipes.
+ * On failure, it dispatches the `fetchRecipesFailure` action with an error message.
  *
  * @yields {PutEffect | CallEffect} Redux-Saga effects for API call and dispatching actions.
  */
 function* getRecipesSaga() {
   try {
     const recipes: IRecipe[] = yield call(fetchAPI, API_URL);
-    yield put(getRecipesSuccess(recipes));
+    yield put(fetchRecipesSuccess(recipes));
   } catch {
-    yield put(getRecipesFailure("Failed to fetch recipe"));
+    yield put(fetchRecipesFailure("Failed to fetch recipe"));
   }
 }
 
@@ -77,7 +77,7 @@ function* removeRecipeSaga(action: {
 }
 
 export function* recipeSagas() {
-  yield takeLatest(getRecipes.type, getRecipesSaga);
+  yield takeLatest(fetchRecipes.type, getRecipesSaga);
   yield takeLatest(addRecipe.type, addRecipeSaga);
   yield takeLatest(removeRecipe.type, removeRecipeSaga);
 }
