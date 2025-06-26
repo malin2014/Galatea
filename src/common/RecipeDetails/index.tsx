@@ -31,15 +31,4 @@ export const RecipeDetail: React.FC<WithLoadingProps> = ({
   ));
 };
 
-/**
- * A higher-order component that wraps the `RecipeDetail` component with data fetching logic
- * using the `withQuery` function. This component is responsible for retrieving the necessary
- * data and passing it as props to `RecipeDetail`.
- *
- * @remarks
- * Use this component when you need to display recipe details with automatic data fetching.
- *
- * @see RecipeDetail
- * @see withQuery
- */
 export const RecipeDetailWithQuery = withQuery(RecipeDetail);

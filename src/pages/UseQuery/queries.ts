@@ -22,22 +22,6 @@ export const removeRecipe = async (id: string) => {
   return await fetchAPI(`${API_URL}/${id}`, { method: "DELETE" });
 };
 
-/**
- * Custom React hook that provides mutation functions for managing recipes.
- *
- * This hook returns three mutation objects (`add`, `update`, and `remove`) for adding,
- * updating, and removing recipes, respectively. Each mutation automatically invalidates
- * the "recipes" query on success to ensure data consistency.
- *
- * @returns An object containing:
- * - `add`: Mutation for adding a recipe.
- * - `update`: Mutation for updating a recipe.
- * - `remove`: Mutation for removing a recipe.
- *
- * @example
- * const { add, update, remove } = useRecipeMutation();
- * add.mutate(newRecipe);
- */
 export const useRecipeMutation = () => {
   const queryClient = useQueryClient();
 

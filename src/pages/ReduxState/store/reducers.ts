@@ -2,18 +2,6 @@
 import { IRecipesState, IRecipe } from "./types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-/**
- * Initial state for the recipes slice.
- *
- * This state includes:
- * - `recipes`: An array of recipe objects.
- * - `fetchRecipeLoading`: A boolean indicating if a fetch operation is in progress.
- * - `fetchRecipeError`: An optional string for any error that occurs during fetching.
- * - `addRecipeLoading`: A boolean indicating if an add operation is in progress.
- * - `addRecipeError`: An optional string for any error that occurs during adding a recipe.
- * - `removeRecipeLoading`: A boolean indicating if a remove operation is in progress.
- * - `removeRecipeError`: An optional string for any error that occurs during removing a recipe.
- */
 const initialState: IRecipesState = {
   recipes: [],
   fetchRecipeLoading: false,
@@ -24,23 +12,6 @@ const initialState: IRecipesState = {
   removeRecipeError: undefined,
 };
 
-/**
- * A Redux slice for managing recipe-related state.
- *
- * This slice handles the following actions:
- * - Fetching recipes (`fetchRecipes`, `fetchRecipesSuccess`, `fetchRecipesFailure`)
- * - Adding a new recipe (`addRecipe`, `addRecipeSuccess`, `addRecipeFailure`)
- * - Removing a recipe (`removeRecipe`, `removeRecipeSuccess`, `removeRecipeFailure`)
- *
- * Each action updates the state accordingly, managing loading and error states.
- *
- * @remarks
- * Uses Redux Toolkit's `createSlice` for concise reducer and action creation.
- *
- * @example
- * // Dispatch an action to fetch recipes
- * dispatch(recipeSlice.actions.fetchRecipes());
- */
 export const recipeSlice = createSlice({
   name: "recipes",
   initialState,
