@@ -12,6 +12,32 @@ const initialState: IRecipesState = {
   removeRecipeError: undefined,
 };
 
+/**
+ * A Redux slice for managing recipe-related state and actions.
+ *
+ * This slice handles the following actions:
+ * - Fetching recipes (with loading and error states)
+ * - Adding a new recipe (with loading and error states)
+ * - Removing a recipe (with loading and error states)
+ *
+ * State fields managed include:
+ * - `recipes`: The list of recipe objects.
+ * - `fetchRecipeLoading`, `addRecipeLoading`, `removeRecipeLoading`: Booleans indicating loading states for each operation.
+ * - `fetchRecipeError`, `addRecipeError`, `removeRecipeError`: Error messages for each operation.
+ *
+ * Actions:
+ * - `fetchRecipes`: Initiates fetching recipes.
+ * - `fetchRecipesSuccess`: Sets the fetched recipes on success.
+ * - `fetchRecipesFailure`: Sets an error message on fetch failure.
+ * - `addRecipe`: Initiates adding a new recipe.
+ * - `addRecipeSuccess`: Adds the new recipe to the list on success.
+ * - `addRecipeFailure`: Sets an error message on add failure.
+ * - `removeRecipe`: Initiates removing a recipe.
+ * - `removeRecipeSuccess`: Removes the recipe from the list on success.
+ * - `removeRecipeFailure`: Sets an error message on remove failure.
+ *
+ * @see {@link https://redux-toolkit.js.org/api/createSlice|Redux Toolkit createSlice}
+ */
 export const recipeSlice = createSlice({
   name: "recipes",
   initialState,

@@ -2,9 +2,21 @@ import { IState } from "@/types";
 import { RootState } from "./config";
 import { IRecipe } from "./types";
 
+/**
+ * Selector to retrieve the list of recipes from the Redux store.
+ *
+ * @param state - The root state of the Redux store.
+ * @returns An array of recipe objects from the store.
+ */
 export const selectRecipes = (state: RootState): IRecipe[] =>
   state.recipes.recipes;
 
+/**
+ * Selector to retrieve the fetch recipe state from the Redux store.
+ *
+ * @param state - The root Redux state.
+ * @returns An object containing the recipe data, loading status, and any fetch error.
+ */
 export const selectFetchRecipeState = (state: RootState): IState => {
   const data = state.recipes.recipes;
   const isLoading = state.recipes.fetchRecipeLoading;
