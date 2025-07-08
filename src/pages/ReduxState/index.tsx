@@ -13,7 +13,7 @@ export const State = () => {
     <>
       <button
         onClick={() => dispatch(addRecipe(mockRecipe))}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        className="button-glass p-2 cursor-pointer shadow-sm"
       >
         Add Recipe
       </button>

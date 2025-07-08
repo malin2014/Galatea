@@ -1,6 +1,43 @@
 @import "tailwindcss";
 
-:root {
+@theme {
+  /* Glassmorphism colors and shadows */
+  --glass-bg: rgba(255 255 255 / 0.15); /* white at 15% opacity */
+  --glass-shadow: 0 4px 30px rgba(0 0 0 / 0.1);
+  --glass-border: rgba(255 255 255 / 0.3);
+
+  /* Radius for smooth rounded corners */
+  --radius-lg: 1rem;
+
+  /* Backdrop blur amount */
+  --blur-md: 10px;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(to top right, #1abc9c, #16a085, #00cec9);
+  color: white;
+  font-family: sans-serif;
+}
+
+/* Component utility for glassmorphism cards */
+.glass {
+  background-color: var(--glass-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+}
+
+.button-glass {
+  background-color: var(--glass-bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+}
+
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -23,4 +60,4 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */

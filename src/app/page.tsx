@@ -7,10 +7,10 @@ export default function Home() {
   return (
     <StateProvider>
       <QueryProvider>
-        <div className="p-4">
+        <>
           <State />
           <UseQuery />
-        </div>
+        </>
       </QueryProvider>
     </StateProvider>
   );

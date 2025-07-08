@@ -11,14 +11,12 @@ export const UseQuery = () => {
 
   return (
     <>
-      <div className="my-4">
-        <button
-          onClick={() => add.mutate(mockRecipe)}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          Add Recipe
-        </button>
-      </div>
+      <button
+        onClick={() => add.mutate(mockRecipe)}
+        className="button-glass p-2 cursor-pointer shadow-sm"
+      >
+        Add Recipe
+      </button>
       <RecipeDetailWithQuery
         {...query}
         onRemove={(id: string) => remove.mutate(id)}
