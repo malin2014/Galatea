@@ -15,11 +15,8 @@ UseQuery/
 
 ## useQuery Implementation Instructions
 
-**Instruction:**  
-Strictly follow the current implementations in `queries.ts` when generating code. Do not introduce new patterns, abstractions, or dependencies. All usage, naming, and logic must match the existing files.
-
-**Reference files:**  
-- `queries.ts`: Contains query definitions and API calls.
-
-**Goal:**  
-Ensure consistency and compatibility with the established codebase.
+1. Ensure use of custom hook that provides mutation functions for managing the useQuery.
+    - Example queries.ts
+2. This hook returns multiple mutation objects.
+3. Each mutation automatically invalidates related query on success to ensure
+the state stays up-to-date.
